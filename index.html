@@ -4,8 +4,19 @@
     </head>
     <body>
         <!-- Add vue here! -->
+        <!-- anything inside our div/html element here, will be accessible to our view if called -->
+        <div id='app'>
+            <!-- what data we want to render inside our html element above -->
+            {{ message }} 
+
+        </div>
         <script>
-            
+            var app = new Vue({ //new instance and pass in obj
+                el: '#app', // links to id app above
+                data: {
+                    message: 'Sofija is learning Vue!',
+                }
+            });
         </script>
     </body>
 </html>
