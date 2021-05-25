@@ -1,46 +1,68 @@
 <html>
-    <head>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    </head>
-    <body>
-        <!-- Add vue here! -->
-        <!-- anything inside our div/html element here, will be accessible to our view if called -->
-        <!-- if you want to use data as an attribute, you need to v-bind or shorthand :title -->
-        <div id='app' v-bind:title='message'> 
-            <!-- what data we want to render inside our html element above goes in double curly brackets -->
-            <!-- below is a JS block and can be used as such -->
-           <h1> {{ title + ' in ' + platform }} </h1>
-           <p>{{ description }}</p>
-           <a :href="link">{{ linkText }}</a>
-        </div>
-        <div id='second'>
-            {{ exclamation + ' ' + reversedMessage }}
-        </div>
-        <script>
-            var app = new Vue({ //new instance and pass in obj
-                el: '#app', // links to id app above
-                data: { // obj of data to pass around
-                    title: 'Sofija is learning Vue',
-                    platform: 'Scrimba',
-                    description: 'This is an interactive lesson on how to remove the data from the DOM and put it on the Vue instance.',
-                    link: 'https://vuejs.org/',
-                    linkText: 'Visit Vue'
-                },
-            });
-            var second = new Vue({
-                el: '#second',
-                data: {
-                    pun: 'Pew Pew',
-                },
-                computed: { //computed properties 
-                    exclamation: function() {
-                        return app.title + ' ' + this.pun + ' !!!';
-                    },
-                    reversedMessage: function() { //can run computed properties on computed properties
-                        return this.exclamation.split('').reverse().join('');
-                    }
-                }
-            });
-        </script>
-    </body>
+	<head>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<!-- Add vue here! -->
+		<!-- anything inside our div/html element here, will be accessible to our view if called -->
+		<!-- if you want to use data as an attribute, you need to v-bind or shorthand :title -->
+		<div id="app" v-bind:title="message">
+			<!-- what data we want to render inside our html element above goes in double curly brackets -->
+			<!-- below is a JS block and can be used as such -->
+			<h1>{{ title + ' in ' + state }}</h1>
+            <img src='https://static.wixstatic.com/media/eda29f_46df31384e61475ea4bec584f525a837~mv2.png/v1/fill/w_1225,h_613,al_c,q_90,usm_0.66_1.00_0.01/eda29f_46df31384e61475ea4bec584f525a837~mv2.webp' alt="Grasshopper Hopping" width='500'/>,
+			<p>{{ description }}</p>
+			<a :href="link">{{ linkText }}</a>
+			<br />
+            <br />
+			<!-- input field example with automatic reactive p display -->
+            <p> {{ inputQuestion }}</p>
+			<input name="field" v-model="field" />
+			<p>My favorite bug is: {{ inputExclamation }}</p>
+		</div>
+		<div id="second">{{ exclamation + ' ' + reversedMessage }}</div>
+		<script>
+			var app = new Vue({
+				//new instance and pass in obj
+				el: "#app", // links to id app above
+				data: {
+					// obj of data to pass around
+					title: "Insects A-Z",
+					state: "Massachusetts",
+					description:
+                        'Summer brings out lots of bugs: creepy, crawly, flittery, fluttery, helpful, harmful, wierd, and cool! Learn more about the insects you share your world with this book.',
+						//"This is an interactive lesson on how to remove the data from the DOM and put it on the Vue instance.",
+					link: "https://www.fiasutton.com/clean-contemporary",
+					linkText: "See the Book",
+                    inputQuestion: 'What\'s your favorite insect?',
+					field: "",
+				},
+				computed: {
+					inputExclamation: function () {
+						if (!this.field) {
+							return " ";
+						}
+						return this.field + "!!!!!!!!!!!";
+					},
+				},
+			});
+			var second = new Vue({
+				el: "#second",
+				data: {
+					pun: "is great",
+				},
+				computed: {
+					//computed properties
+					exclamation: function () {
+						return app.title + " " + this.pun + " !!!";
+					},
+					reversedMessage: function () {
+						//can run computed properties on computed properties
+						return this.exclamation.split("").reverse().join("");
+					},
+				},
+				//v-model allows tie between input field in html to data property in vue instance
+			});
+		</script>
+	</body>
 </html>
