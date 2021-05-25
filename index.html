@@ -12,7 +12,9 @@
            <h1> {{ title + ' in ' + platform }} </h1>
            <p>{{ description }}</p>
            <a :href="link">{{ linkText }}</a>
-
+        </div>
+        <div id='second'>
+            {{ exclamation + ' ' + reversedMessage }}
         </div>
         <script>
             var app = new Vue({ //new instance and pass in obj
@@ -23,6 +25,20 @@
                     description: 'This is an interactive lesson on how to remove the data from the DOM and put it on the Vue instance.',
                     link: 'https://vuejs.org/',
                     linkText: 'Visit Vue'
+                },
+            });
+            var second = new Vue({
+                el: '#second',
+                data: {
+                    pun: 'Pew Pew',
+                },
+                computed: { //computed properties 
+                    exclamation: function() {
+                        return app.title + ' ' + this.pun + ' !!!';
+                    },
+                    reversedMessage: function() { //can run computed properties on computed properties
+                        return this.exclamation.split('').reverse().join('');
+                    }
                 }
             });
         </script>
