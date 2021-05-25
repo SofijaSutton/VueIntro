@@ -10,16 +10,24 @@
 			<!-- what data we want to render inside our html element above goes in double curly brackets -->
 			<!-- below is a JS block and can be used as such -->
 			<h1>{{ title + ' in ' + state }}</h1>
-            <img src='https://static.wixstatic.com/media/eda29f_46df31384e61475ea4bec584f525a837~mv2.png/v1/fill/w_1225,h_613,al_c,q_90,usm_0.66_1.00_0.01/eda29f_46df31384e61475ea4bec584f525a837~mv2.webp' alt="Grasshopper Hopping" width='500'/>,
+			<img
+				src="https://static.wixstatic.com/media/eda29f_46df31384e61475ea4bec584f525a837~mv2.png/v1/fill/w_1225,h_613,al_c,q_90,usm_0.66_1.00_0.01/eda29f_46df31384e61475ea4bec584f525a837~mv2.webp"
+				alt="Grasshopper Hopping"
+				width="90%"
+			/>,
 			<p>{{ description }}</p>
 			<a :href="link">{{ linkText }}</a>
 			<br />
-            <br />
+			<br />
+
 			<!-- input field example with automatic reactive p display -->
-            <p> {{ inputQuestion }}</p>
-			<input name="field" v-model="field" />
-			<p>My favorite bug is: {{ inputExclamation }}</p>
+			<p>{{ inputQuestion }}</p>
+			<input type="text" name="field" v-model="answer" />
+			<!-- <p>My favorite bug is a: {{ inputExclamation }}</p> -->
+			<p>My color was: {{ color }}</p>
+			<p>My bug was: {{ insect }}</p>
 		</div>
+
 		<div id="second">{{ exclamation + ' ' + reversedMessage }}</div>
 		<script>
 			var app = new Vue({
@@ -30,19 +38,33 @@
 					title: "Insects A-Z",
 					state: "Massachusetts",
 					description:
-                        'Summer brings out lots of bugs: creepy, crawly, flittery, fluttery, helpful, harmful, wierd, and cool! Learn more about the insects you share your world with this book.',
-						//"This is an interactive lesson on how to remove the data from the DOM and put it on the Vue instance.",
+						"Summer brings out lots of bugs: creepy, crawly, flittery, fluttery, helpful, harmful, wierd, and cool! Learn more about the insects you share your world with this book.",
+					//"This is an interactive lesson on how to remove the data from the DOM and put it on the Vue instance.",
 					link: "https://www.fiasutton.com/clean-contemporary",
 					linkText: "See the Book",
-                    inputQuestion: 'What\'s your favorite insect?',
+					inputQuestion:
+						"What's your favorite insect and color? Ex: blue dragonfly",
 					field: "",
+					color: "",
+					insect: "",
 				},
 				computed: {
-					inputExclamation: function () {
-						if (!this.field) {
-							return " ";
-						}
-						return this.field + "!!!!!!!!!!!";
+					// inputExclamation: function () {
+					// 	if (!this.field) {
+					// 		return " ";
+					// 	}
+					// 	return this.field + "!!!!!!!!!!!";
+					// },
+					answer: {
+						get: function () {
+							return this.color + " " + this.insect;
+						},
+						set: function (newValue) {
+							let answers = newValue.split(" ");
+							//console.log(answers);
+							this.color = answers[0]; //bc auto adds a space at front, will learn how to handle better in future but gives idea
+							this.insect = answers[1];
+						},
 					},
 				},
 			});
