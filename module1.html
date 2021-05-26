@@ -1,0 +1,49 @@
+<!-- creating a form -->
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        
+        <!-- Let's add Vue here -->
+        <div id="app">
+            
+            <h1>Contact Form</h1>
+            
+            <form method="post" action="#">
+                <div>
+                    <label for="name">Name</label>
+                    <!-- dont forget to add v-model! -->
+                    <input name="name" id="name" v-model='name' />
+                </div>
+                <div>
+                    <label for="email">Email</label>
+                    <input name="email" id="email" v-model='email'/>
+                </div>
+                <div>
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" v-model='message'></textarea>
+                </div>
+            </form>
+
+            <h2>Form Details</h2>
+            
+            <!-- DETAILS HERE -->
+            <p>Name: {{ name }}</p>
+            <p></p>Email: {{ email }}
+            <p></p>Message: {{ message }}
+            
+        </div>
+        
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    name: '',
+                    email: '',
+                    message: '',
+                } 
+            });
+        </script>
+    </body>
+</html>

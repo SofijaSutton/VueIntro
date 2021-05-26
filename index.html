@@ -22,6 +22,7 @@
 
 			<!-- input field example with automatic reactive p display -->
 			<p>{{ inputQuestion }}</p>
+			<!-- don't forget to add v-model to link input down to fields to display -->
 			<input type="text" name="field" v-model="answer" />
 			<!-- <p>My favorite bug is a: {{ inputExclamation }}</p> -->
 			<p>My color was: {{ color }}</p>
@@ -116,9 +117,6 @@
 					}
 				}
 			})
-			
-
-
 		</script>
 	</body>
 </html>
