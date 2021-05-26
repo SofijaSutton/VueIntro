@@ -29,6 +29,18 @@
 		</div>
 
 		<div id="second">{{ exclamation + ' ' + reversedMessage }}</div>
+	</br>
+
+		<!-- below div used in method example -->
+		<div id="methodThird">
+			<h1>Do you like insects?</h1>
+			<h3>Yes or No?</h3>
+			<input name='methodField' v-model='methodField' />
+			<p>Your wrote: {{ methodField }} </p>
+			<!-- add a click event below -->
+			<button @click='modified'>Click ME</button>
+		</div>
+
 		<script>
 			var app = new Vue({
 				//new instance and pass in obj
@@ -85,6 +97,28 @@
 				},
 				//v-model allows tie between input field in html to data property in vue instance
 			});
+
+			//Methods: are not reactive like computed properties, but are triggerable
+			var methodThird = new Vue({
+				el: '#methodThird',
+				data: {
+					methodField: '',
+				},
+				methods: {
+					modified: function() {
+						if (this.methodField[0] === 'y'  && this.methodField[1] === 'e'  && this.methodField[2] === 's') {
+							this.methodField += '! Yay!';
+						} else if (this.methodField[0] === 'n'  && this.methodField[1] === 'o') {
+							this.methodField += '? Are you sure?';
+						} else {
+							this.methodField += ' Can you answer with yes or no, please?'
+						}
+					}
+				}
+			})
+			
+
+
 		</script>
 	</body>
 </html>
