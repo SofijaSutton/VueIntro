@@ -14,14 +14,17 @@
 					<label for="name">Name</label>
 					<!-- dont forget to add v-model! Add form. to v-model for nested attribute refactor --> 
 					<input name="name" id="name" v-model="form.name" />
+                    <p style="color: red">{{ requiredName }}</p>
 				</div>
 				<div>
 					<label for="email">Email</label>
 					<input name="email" id="email" v-model="form.email" />
+                    <p style="color: red">{{ requiredEmail }}</p>
 				</div>
 				<div>
 					<label for="message">Message</label>
 					<textarea name="message" id="message" v-model="form.message"></textarea>
+                    <p style="color: red">{{ requiredMessage }}</p>
 				</div>
 				<button @click.prevent="submitMethod">Send Form</button>
 			</form>
@@ -47,6 +50,7 @@
 						message: "",
 					},
 					response: "",
+                  //  required: '',
 				},
 				methods: {
 					submitMethod: function () {
@@ -58,6 +62,23 @@
 						}
 					},
 				},
+                computed: {
+                    requiredName: function() {
+                        if (!this.form.name && this.response) {
+                           return 'Name field required';
+                        }
+                    },
+                    requiredEmail: function() {
+                        if (!this.form.email && this.response) {
+                           return 'Email field required';
+                        }
+                    },
+                    requiredMessage: function() {
+                        if (!this.form.message && this.response) {
+                            return 'Message field required';
+                        }
+                    }
+                }
 			});
 		</script>
 	</body>
