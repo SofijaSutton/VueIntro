@@ -1,63 +1,64 @@
 <!-- creating a form -->
 <html>
-    <head>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    </head>
-    <body>
-        
-        <!-- Let's add Vue here -->
-        <div id="app">
-            
-            <h1>Contact Form</h1>
-            <p style="color: red">{{ response }}</p>
-            
-            <form method="post" action="#">
-                <div>
-                    <label for="name">Name</label>
-                    <!-- dont forget to add v-model! -->
-                    <input name="name" id="name" v-model='name' />
-                </div>
-                <div>
-                    <label for="email">Email</label>
-                    <input name="email" id="email" v-model='email'/>
-                </div>
-                <div>
-                    <label for="message">Message</label>
-                    <textarea name="message" id="message" v-model='message'></textarea>
-                </div>
-                <button @click.prevent="submitMethod">Send Form</button>
-            </form>
+	<head>
+		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<!-- Let's add Vue here -->
+		<div id="app">
+			<h1>Contact Form</h1>
+			<p style="color: red">{{ response }}</p>
 
-            <h2>Form Details</h2>
-            
-            <!-- DETAILS HERE -->
-            <p>Name: {{ name }}</p>
-            <p></p>Email: {{ email }}
-            <p></p>Message: {{ message }}
-            
-        </div>
-        
-        <script>
-            var app = new Vue({
-                el: '#app',
-                data: {
-                    name: '',
-                    email: '',
-                    message: '',
-                    response: '',
-                } ,
-                methods: {
-                    submitMethod: function() {
-                        if (this.name && this.email && this.message) {
-                            this.response = 'Form submitted successfully';
-                        } else {
-                            this.response = 'Form field incomplete. Please complete form and submit again.';
-                        }
-                    }
-                }
-            });
+			<form method="post" action="#">
+				<div>
+					<label for="name">Name</label>
+					<!-- dont forget to add v-model! Add form. to v-model for nested attribute refactor --> 
+					<input name="name" id="name" v-model="form.name" />
+				</div>
+				<div>
+					<label for="email">Email</label>
+					<input name="email" id="email" v-model="form.email" />
+				</div>
+				<div>
+					<label for="message">Message</label>
+					<textarea name="message" id="message" v-model="form.message"></textarea>
+				</div>
+				<button @click.prevent="submitMethod">Send Form</button>
+			</form>
 
+			<h2>Form Details</h2>
 
-        </script>
-    </body>
+			<!-- DETAILS HERE -->
+			<p>Name: {{ form.name }}</p>
+			<p></p>
+			Email: {{ form.email }}
+			<p></p>
+			Message: {{ form.message }}
+		</div>
+
+		<script>
+			var app = new Vue({
+				el: "#app",
+				data: {
+					//can nest data attributes to organize better/refactor
+					form: {
+						name: "",
+						email: "",
+						message: "",
+					},
+					response: "",
+				},
+				methods: {
+					submitMethod: function () {
+						if (this.form.name && this.form.email && this.form.message) {
+							this.response = "Form submitted successfully";
+						} else {
+							this.response =
+								"Form field incomplete. Please complete form and submit again.";
+						}
+					},
+				},
+			});
+		</script>
+	</body>
 </html>
