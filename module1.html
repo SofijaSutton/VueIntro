@@ -9,6 +9,7 @@
         <div id="app">
             
             <h1>Contact Form</h1>
+            <p style="color: red">{{ response }}</p>
             
             <form method="post" action="#">
                 <div>
@@ -24,6 +25,7 @@
                     <label for="message">Message</label>
                     <textarea name="message" id="message" v-model='message'></textarea>
                 </div>
+                <button @click.prevent="submitMethod">Send Form</button>
             </form>
 
             <h2>Form Details</h2>
@@ -42,8 +44,20 @@
                     name: '',
                     email: '',
                     message: '',
-                } 
+                    response: '',
+                } ,
+                methods: {
+                    submitMethod: function() {
+                        if (this.name && this.email && this.message) {
+                            this.response = 'Form submitted successfully';
+                        } else {
+                            this.response = 'Form field incomplete. Please complete form and submit again.';
+                        }
+                    }
+                }
             });
+
+
         </script>
     </body>
 </html>
